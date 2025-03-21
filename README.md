@@ -1,1 +1,1 @@
-# logit
+# cli-journal

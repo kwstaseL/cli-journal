@@ -1,4 +1,4 @@
-module github.com/kwstaseL/logit
+module github.com/kwstaseL/cli-journal
 
 go 1.24.0
 

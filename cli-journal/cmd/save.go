@@ -6,7 +6,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/kwstaseL/logit/internal/model"
+	"github.com/kwstaseL/cli-journal/internal/model"
 	"github.com/spf13/cobra"
 )
 
@@ -35,7 +35,6 @@ var saveCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(saveCmd)
 
-	// Flags for save command
 	saveCmd.Flags().StringP("title", "t", "", "title of the note")
 	saveCmd.Flags().StringP("content", "c", "", "content of the note")
 	saveCmd.Flags().StringP("category", "g", "general", "category of the note")

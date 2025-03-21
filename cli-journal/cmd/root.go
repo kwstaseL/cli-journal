@@ -10,7 +10,7 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "logit",
+	Use:   "cli-journal",
 	Short: "A simple CLI tool to save, edit and share notes",
 	Long: `A simple CLI tool to save, edit and share notes`,
 }
