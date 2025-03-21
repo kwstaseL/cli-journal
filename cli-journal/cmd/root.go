@@ -7,7 +7,10 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"gorm.io/gorm"
 )
+
+var dbConnection *gorm.DB
 
 var rootCmd = &cobra.Command{
 	Use:   "cli-journal",
@@ -25,5 +28,3 @@ func Execute() {
 func init() {
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
-
-
