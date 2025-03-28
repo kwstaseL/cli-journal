@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/kwstaseL/cli-journal/internal/model"
-	"github.com/kwstaseL/cli-journal/internal/repository"
+	"github.com/kwstaseL/cli-journal/cmd/internal/model"
+	"github.com/kwstaseL/cli-journal/cmd/internal/repository"
 )
 
 type NoteService interface {

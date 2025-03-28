@@ -9,7 +9,11 @@ type SQLite struct {
     Path string
 }
 
-func (s *SQLite) Connect() (*gorm.DB, error) {
+type SQLiteConfig struct {
+
+}
+
+func (s *SQLite) Connect(config SQLiteConfig) (*gorm.DB, error) {
     db, err := gorm.Open(sqlite.Open(s.Path), &gorm.Config{})
     if err != nil {
         return nil, err

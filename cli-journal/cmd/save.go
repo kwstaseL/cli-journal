@@ -6,7 +6,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/kwstaseL/cli-journal/internal/model"
+	"github.com/kwstaseL/cli-journal/cmd/internal/model"
 	"github.com/spf13/cobra"
 )
 
