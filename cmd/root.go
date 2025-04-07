@@ -6,21 +6,20 @@ package cmd
 import (
 	"os"
 
+	logger "github.com/kwstaseL/cli-journal/pkg/logging"
 	"github.com/spf13/cobra"
-	"gorm.io/gorm"
 )
-
-var dbConnection *gorm.DB
 
 var rootCmd = &cobra.Command{
 	Use:   "cli-journal",
 	Short: "A simple CLI tool to save, edit and share notes",
-	Long: `A simple CLI tool to save, edit and share notes`,
+	Long: ``,
 }
 
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
+		logger.LogError("Error occured while trying to execute root.")
 		os.Exit(1)
 	}
 }
