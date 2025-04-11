@@ -7,8 +7,15 @@ import (
 	"os"
 
 	logger "github.com/kwstaseL/cli-journal/pkg/logging"
+	"github.com/kwstaseL/cli-journal/pkg/service"
 	"github.com/spf13/cobra"
 )
+
+var noteService service.NoteService
+
+func SetNoteService(service service.NoteService) {
+	noteService = service
+}
 
 var rootCmd = &cobra.Command{
 	Use:   "cli-journal",

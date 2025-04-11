@@ -24,7 +24,10 @@ func (n *noteService) CreateNewNote(note model.Note) error {
 	err := n.repo.CreateNote(
 		note,
 	)
-	logIfError(err, "Error creating note")
+	if err != nil {
+		logger.LogError("Error creating note: %v", err)
+        return err
+    }
 	logger.LogDebug("Note created successfully: %s", note.String())
 	return nil
 }
@@ -32,20 +35,19 @@ func (n *noteService) CreateNewNote(note model.Note) error {
 
 func (n *noteService) ListFrequentNotes(limit int) ([]model.Note, error) {
 	frequentNotes, err := n.repo.ListFrequentNotes(limit)
-	logIfError(err, "Error when trying to list frequent notes")
+	if err != nil {
+		logger.LogError("Error while trying to list frequent notes: %v", err)
+        return nil, err
+    }
 	logger.LogDebug("Notes acquired %s", frequentNotes)
 	return frequentNotes, err
 }
 
 func (n *noteService) ListNotesBy(filters model.NoteFilters) ([]model.Note, error) {
 	filteredNotes, err := n.repo.ListNotesBy(filters)
-	logIfError(err, "Error when trying to filter notes")
-	return filteredNotes, nil
-}
-
-func logIfError(err error, context string) error {
 	if err != nil {
-		logger.LogError("%s: %v", context, err)
-	}
-	return err
+		logger.LogError("Error while trying to filter notes: %v", err)
+        return nil, err
+    }
+	return filteredNotes, nil
 }

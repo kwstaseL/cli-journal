@@ -15,7 +15,11 @@ var listCmd = &cobra.Command{
 	Long: ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		limit, _ := cmd.Flags().GetInt("limit")
-		frequentNotes, _ := noteService.ListFrequentNotes(limit)
+		frequentNotes, err := noteService.ListFrequentNotes(limit)
+		if err != nil {
+			fmt.Printf("Error: Unable to find recent notes. %v\n", err)
+			return
+		}
 		// TODO: Send a proper message to the user
 		fmt.Println(frequentNotes)
 	},

@@ -1,16 +1,11 @@
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/kwstaseL/cli-journal/pkg/model"
-	"github.com/kwstaseL/cli-journal/pkg/service"
 	"github.com/spf13/cobra"
 )
-
-var noteService service.NoteService
-
-func SetNoteService(service service.NoteService) {
-	noteService = service
-}
 
 var saveCmd = &cobra.Command{
 	Use:   "save",
@@ -23,7 +18,12 @@ var saveCmd = &cobra.Command{
 		tags, _ := cmd.Flags().GetString("tags")
 		
 		note := model.NewNote(header, body, category, tags)
-		noteService.CreateNewNote(*note)
+		err := noteService.CreateNewNote(*note)
+		
+		if err != nil {
+			fmt.Printf("Error: Unable to save note. %v\n", err)
+			return
+		}
 		// TODO: Send a proper message to the user
 	},
 }

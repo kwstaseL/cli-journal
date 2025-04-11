@@ -15,11 +15,16 @@ var searchCmd = &cobra.Command{
 	Short: "Search for your notes by tag, category or text.",
 	Long: ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		tags, _ := cmd.Flags().GetString("tags")
-		category, _ := cmd.Flags().GetString("category")
-		text, _ := cmd.Flags().GetString("text")
-		filteredNotes, _ := noteService.ListNotesBy(model.NoteFilters{Tags: tags, Category: category, SearchTerm: text})
+		searchTags, _ := cmd.Flags().GetString("tags")
+		searchCategory, _ := cmd.Flags().GetString("category")
+		searchTerm, _ := cmd.Flags().GetString("text")
+		filteredNotes, err := noteService.ListNotesBy(model.NoteFilters{Tags: searchTags, Category: searchCategory,
+																		 SearchTerm: searchTerm})
 		// TODO: Send a proper message to the user
+		if err != nil {
+			fmt.Printf("Error: Unable to filter notes. %v\n", err)
+			return
+		}
 		fmt.Println(filteredNotes)
 	},
 }
