@@ -38,7 +38,9 @@ func (n *noteService) ListFrequentNotes(limit int) ([]model.Note, error) {
 }
 
 func (n *noteService) ListNotesBy(filters model.NoteFilters) ([]model.Note, error) {
-	panic("Unimplemented")
+	notes, err := n.repo.ListNotesBy(filters)
+	logIfError(err, "Error when trying to filter notes")
+	return notes, nil
 }
 
 func logIfError(err error, context string) error {

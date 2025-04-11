@@ -2,6 +2,7 @@ package repository
 
 import (
 	"fmt"
+	"strings"
 
 	logger "github.com/kwstaseL/cli-journal/pkg/logging"
 	"github.com/kwstaseL/cli-journal/pkg/model"
@@ -48,5 +49,25 @@ func (n *noteRepository) ListFrequentNotes(limit int) ([]model.Note, error) {
 
 
 func (n *noteRepository) ListNotesBy(filters model.NoteFilters) ([]model.Note, error) {
-	panic("Unimplemented")
+    var notes []model.Note
+    query := n.db.Model(&model.Note{})
+
+    if filters.Tags != "" {
+        tags := strings.Split(filters.Tags, ",")
+        for _, tag := range tags {
+            query = query.Where("tags LIKE ?", "%"+strings.TrimSpace(tag)+"%")
+        }
+    }
+
+    if filters.Category != "" {
+        query = query.Where("category LIKE ?", "%"+strings.TrimSpace(filters.Category)+"%")
+    }
+
+    if filters.SearchTerm != "" {
+        query = query.Where("header LIKE ? OR body LIKE ?", "%"+strings.TrimSpace(filters.SearchTerm)+"%", "%"+strings.TrimSpace(filters.SearchTerm)+"%")
+    }
+
+    query.Debug().Find(&notes)
+    err := query.Find(&notes).Error
+    return notes, err
 }

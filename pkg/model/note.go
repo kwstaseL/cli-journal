@@ -9,6 +9,12 @@ import (
 	"gorm.io/gorm"
 )
 
+type NoteFilters struct {
+	Tags      string
+	Category  string 
+	SearchTerm string
+}
+
 type Note struct {
     gorm.Model
     Header    string `json:"header" gorm:"not null"`
