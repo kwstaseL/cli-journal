@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-type Config struct {
+type DBConfig struct {
 	EnableLogging bool
 	MaxIdleConns  int
 	MaxOpenConns  int
@@ -13,8 +13,8 @@ type Config struct {
 
 var SQLiteConfig = InitConfig()
 
-func InitConfig() Config {
-	return Config{
+func InitConfig() DBConfig {
+	return DBConfig{
 		EnableLogging: getEnvAsBool("ENABLE_LOGGING", false),
 		MaxIdleConns:  getEnvAsInt("MAX_IDLE_CONNS", 0),
 		MaxOpenConns:  getEnvAsInt("MAX_OPEN_CONNS", 0),

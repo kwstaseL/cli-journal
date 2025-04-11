@@ -19,6 +19,7 @@ var searchCmd = &cobra.Command{
 		category, _ := cmd.Flags().GetString("category")
 		text, _ := cmd.Flags().GetString("text")
 		filteredNotes, _ := noteService.ListNotesBy(model.NoteFilters{Tags: tags, Category: category, SearchTerm: text})
+		// TODO: Send a proper message to the user
 		fmt.Println(filteredNotes)
 	},
 }

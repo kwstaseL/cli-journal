@@ -15,12 +15,13 @@ var listCmd = &cobra.Command{
 	Long: ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		limit, _ := cmd.Flags().GetInt("limit")
-		notes, _ := noteService.ListFrequentNotes(limit)
-		fmt.Println(notes)
+		frequentNotes, _ := noteService.ListFrequentNotes(limit)
+		// TODO: Send a proper message to the user
+		fmt.Println(frequentNotes)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(listCmd)
-	listCmd.Flags().IntP("limit", "l", 3, "Amount of notes to show")
+	listCmd.Flags().IntP("limit", "l", 3, "Number of notes to show")
 }

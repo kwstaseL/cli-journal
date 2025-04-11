@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	logger "github.com/kwstaseL/cli-journal/pkg/logging"
 	"github.com/kwstaseL/cli-journal/pkg/model"
 	"github.com/kwstaseL/cli-journal/pkg/service"
 	"github.com/spf13/cobra"
@@ -22,19 +21,10 @@ var saveCmd = &cobra.Command{
 		body, _ := cmd.Flags().GetString("body")
 		category, _ := cmd.Flags().GetString("category")
 		tags, _ := cmd.Flags().GetString("tags")
-	
-		if header == "" || body == "" {
-			cmd.Help()
-			return
-		}
 		
 		note := model.NewNote(header, body, category, tags)
-		err := noteService.CreateNewNote(*note)
-		if err != nil {
-			logger.LogError("Error saving note", err)
-		} else {
-			logger.LogDebug("Note saved successfully", note)
-		}
+		noteService.CreateNewNote(*note)
+		// TODO: Send a proper message to the user
 	},
 }
 

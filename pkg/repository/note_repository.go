@@ -40,16 +40,16 @@ func (n *noteRepository) CreateNote(note model.Note) error {
 }
 
 func (n *noteRepository) ListFrequentNotes(limit int) ([]model.Note, error) {
-    var notes []model.Note
+    var frequentNotes []model.Note
     err := n.db.Order("created_at DESC").
                 Limit(limit).
-                Find(&notes).Error
-    return notes, err
+                Find(&frequentNotes).Error
+    return frequentNotes, err
 }
 
 
 func (n *noteRepository) ListNotesBy(filters model.NoteFilters) ([]model.Note, error) {
-    var notes []model.Note
+    var filteredNotes []model.Note
     query := n.db.Model(&model.Note{})
 
     if filters.Tags != "" {
@@ -67,7 +67,7 @@ func (n *noteRepository) ListNotesBy(filters model.NoteFilters) ([]model.Note, e
         query = query.Where("header LIKE ? OR body LIKE ?", "%"+strings.TrimSpace(filters.SearchTerm)+"%", "%"+strings.TrimSpace(filters.SearchTerm)+"%")
     }
 
-    query.Debug().Find(&notes)
-    err := query.Find(&notes).Error
-    return notes, err
+    query.Debug().Find(&filteredNotes)
+    err := query.Find(&filteredNotes).Error
+    return filteredNotes, err
 }

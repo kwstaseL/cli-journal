@@ -31,16 +31,16 @@ func (n *noteService) CreateNewNote(note model.Note) error {
 
 
 func (n *noteService) ListFrequentNotes(limit int) ([]model.Note, error) {
-	freqNotes, err := n.repo.ListFrequentNotes(limit)
+	frequentNotes, err := n.repo.ListFrequentNotes(limit)
 	logIfError(err, "Error when trying to list frequent notes")
-	logger.LogDebug("Notes acquired %s", freqNotes)
-	return freqNotes, err
+	logger.LogDebug("Notes acquired %s", frequentNotes)
+	return frequentNotes, err
 }
 
 func (n *noteService) ListNotesBy(filters model.NoteFilters) ([]model.Note, error) {
-	notes, err := n.repo.ListNotesBy(filters)
+	filteredNotes, err := n.repo.ListNotesBy(filters)
 	logIfError(err, "Error when trying to filter notes")
-	return notes, nil
+	return filteredNotes, nil
 }
 
 func logIfError(err error, context string) error {

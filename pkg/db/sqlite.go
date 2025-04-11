@@ -14,7 +14,7 @@ type SQLite struct {
 	Path string
 }
 
-func (s *SQLite) Connect(config Config) (*gorm.DB, error) {
+func (s *SQLite) Connect(config DBConfig) (*gorm.DB, error) {
 	dir := filepath.Dir(s.Path)
 	err := os.MkdirAll(dir, 0755)
 	if err != nil {
