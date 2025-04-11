@@ -8,6 +8,8 @@ import (
 
 type NoteService interface {
 	CreateNewNote(note model.Note) error
+	ListFrequentNotes(limit int) ([]model.Note, error)
+	ListNotesBy(filters model.NoteFilters) ([]model.Note, error)
 }
 
 type noteService struct {
@@ -22,10 +24,26 @@ func (n *noteService) CreateNewNote(note model.Note) error {
 	err := n.repo.CreateNote(
 		note,
 	)
-	if err != nil {
-		logger.LogError("Error creating note: %v", err)
-		return err
-	}
-	logger.LogInfo("Note created successfully: %s", note.String())
+	logIfError(err, "Error creating note")
+	logger.LogDebug("Note created successfully: %s", note.String())
 	return nil
+}
+
+
+func (n *noteService) ListFrequentNotes(limit int) ([]model.Note, error) {
+	freqNotes, err := n.repo.ListFrequentNotes(limit)
+	logIfError(err, "Error when trying to list frequent notes")
+	logger.LogDebug("Notes acquired %s", freqNotes)
+	return freqNotes, err
+}
+
+func (n *noteService) ListNotesBy(filters model.NoteFilters) ([]model.Note, error) {
+	panic("Unimplemented")
+}
+
+func logIfError(err error, context string) error {
+	if err != nil {
+		logger.LogError("%s: %v", context, err)
+	}
+	return err
 }
