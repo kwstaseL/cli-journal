@@ -12,6 +12,7 @@ import (
 )
 
 var noteService service.NoteService
+var noteCLIDrawer *NoteCLIDrawer
 
 func SetNoteService(service service.NoteService) {
 	noteService = service
@@ -33,4 +34,5 @@ func Execute() {
 
 func init() {
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	noteCLIDrawer = NewNoteCLIDrawer()
 }

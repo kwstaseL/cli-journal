@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/kwstaseL/cli-journal/pkg/model"
 	"github.com/spf13/cobra"
 )
@@ -21,10 +19,10 @@ var saveCmd = &cobra.Command{
 		err := noteService.CreateNewNote(*note)
 		
 		if err != nil {
-			fmt.Printf("Error: Unable to save note. %v\n", err)
+			noteCLIDrawer.DrawError("Error while trying to save note", err)
 			return
 		}
-		// TODO: Send a proper message to the user
+		noteCLIDrawer.DrawSaveSuccess(*note)
 	},
 }
 

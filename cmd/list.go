@@ -4,8 +4,6 @@ Copyright © 2025 Konstantinos Eleftheriou <eleftheriou.konst@gmail.com>
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 )
 
@@ -17,11 +15,10 @@ var listCmd = &cobra.Command{
 		limit, _ := cmd.Flags().GetInt("limit")
 		frequentNotes, err := noteService.ListFrequentNotes(limit)
 		if err != nil {
-			fmt.Printf("Error: Unable to find recent notes. %v\n", err)
+			noteCLIDrawer.DrawError("Error while trying to find recently added notes", err)
 			return
 		}
-		// TODO: Send a proper message to the user
-		fmt.Println(frequentNotes)
+		noteCLIDrawer.DrawListNotes(frequentNotes)
 	},
 }
 

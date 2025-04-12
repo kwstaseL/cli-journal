@@ -4,8 +4,6 @@ Copyright © 2025 Konstantinos Eleftheriou <eleftheriou.konst@gmail.com>
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/kwstaseL/cli-journal/pkg/model"
 	"github.com/spf13/cobra"
 )
@@ -20,12 +18,11 @@ var searchCmd = &cobra.Command{
 		searchTerm, _ := cmd.Flags().GetString("text")
 		filteredNotes, err := noteService.ListNotesBy(model.NoteFilters{Tags: searchTags, Category: searchCategory,
 																		 SearchTerm: searchTerm})
-		// TODO: Send a proper message to the user
 		if err != nil {
-			fmt.Printf("Error: Unable to filter notes. %v\n", err)
+			noteCLIDrawer.DrawError("Error while trying to search for notes", err)
 			return
 		}
-		fmt.Println(filteredNotes)
+		noteCLIDrawer.DrawListNotes(filteredNotes)
 	},
 }
 
