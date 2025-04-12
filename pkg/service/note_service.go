@@ -10,6 +10,7 @@ type NoteService interface {
 	CreateNewNote(note model.Note) error
 	ListFrequentNotes(limit int) ([]model.Note, error)
 	ListNotesBy(filters model.NoteFilters) ([]model.Note, error)
+	GetNoteById(id string) (*model.Note, error)
 }
 
 type noteService struct {
@@ -50,4 +51,13 @@ func (n *noteService) ListNotesBy(filters model.NoteFilters) ([]model.Note, erro
         return nil, err
     }
 	return filteredNotes, nil
+}
+
+func (n *noteService) GetNoteById(id string) (*model.Note, error) {
+	note, err := n.repo.GetNoteById(id)
+	if err != nil {
+		logger.LogError("Failed to fetch note by ID %s: %v", id, err)
+		return nil, err
+	}
+	return note, nil
 }

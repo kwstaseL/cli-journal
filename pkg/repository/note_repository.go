@@ -13,6 +13,7 @@ type NoteRepository interface {
 	CreateNote(note model.Note) error
 	ListFrequentNotes(limit int) ([]model.Note, error)
 	ListNotesBy(filters model.NoteFilters) ([]model.Note, error)
+	GetNoteById(id string) (*model.Note, error)
 }
 
 type noteRepository struct {
@@ -70,4 +71,16 @@ func (n *noteRepository) ListNotesBy(filters model.NoteFilters) ([]model.Note, e
     query.Debug().Find(&filteredNotes)
     err := query.Find(&filteredNotes).Error
     return filteredNotes, err
+}
+
+func (n *noteRepository) GetNoteById(id string) (*model.Note, error) {
+	var note model.Note
+	result := n.db.First(&note, "id = ?", id)
+	if result.Error != nil {
+		if result.Error == gorm.ErrRecordNotFound {
+			return nil, fmt.Errorf("note with ID %s not found", id)
+		}
+		return nil, fmt.Errorf("failed to retrieve note: %w", result.Error)
+	}
+	return &note, nil
 }
