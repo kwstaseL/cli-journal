@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 
 	"github.com/glebarez/sqlite"
+	"github.com/kwstaseL/cli-journal/pkg/db/utils"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 )
@@ -14,7 +15,7 @@ type SQLite struct {
 	Path string
 }
 
-func (s *SQLite) Connect(config DBConfig) (*gorm.DB, error) {
+func (s *SQLite) Connect(config utils.DBConfig) (*gorm.DB, error) {
 	dir := filepath.Dir(s.Path)
 	err := os.MkdirAll(dir, 0755)
 	if err != nil {

@@ -6,6 +6,7 @@ package main
 import (
 	"github.com/kwstaseL/cli-journal/cmd"
 	"github.com/kwstaseL/cli-journal/pkg/db"
+	"github.com/kwstaseL/cli-journal/pkg/db/utils"
 	logger "github.com/kwstaseL/cli-journal/pkg/logging"
 	"github.com/kwstaseL/cli-journal/pkg/repository"
 	"github.com/kwstaseL/cli-journal/pkg/service"
@@ -14,7 +15,7 @@ import (
 
 func initializeDB(dbPath string) (*gorm.DB, error) {
     sqliteDB := db.NewSQLite(dbPath)
-    return sqliteDB.Connect(db.SQLiteConfig)
+    return sqliteDB.Connect(utils.SQLiteConfig)
 }
 
 func main() {

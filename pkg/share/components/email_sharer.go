@@ -1,4 +1,4 @@
-package share
+package components
 
 import "github.com/kwstaseL/cli-journal/pkg/model"
 

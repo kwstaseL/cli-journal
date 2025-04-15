@@ -1,10 +1,11 @@
-package export
+package components
 
 import (
 	"fmt"
 	"os"
 	"path/filepath"
 
+	"github.com/kwstaseL/cli-journal/pkg/export/utils"
 	"github.com/kwstaseL/cli-journal/pkg/model"
 )
 
@@ -14,9 +15,9 @@ type TxtExporter struct {
 
 func (t *TxtExporter) Export(note model.Note) error {
 	filename := fmt.Sprintf("%d.txt", note.ID)
-	fullPath := filepath.Join(ExportPath, filename)
+	fullPath := filepath.Join("./data", filename)
 
-	content := FormatNoteAsTxt(note, NoteFormatOptions{
+	content := utils.FormatNoteAsTxt(note, utils.NoteFormatOptions{
 		IncludeTags:     true,
 		IncludeCategory: true,
 		IncludeCreated:  true,

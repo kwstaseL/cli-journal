@@ -1,4 +1,4 @@
-package share
+package components
 
 import (
 	"fmt"
