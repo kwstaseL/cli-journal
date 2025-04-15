@@ -11,7 +11,7 @@ func GetExporter(platform string) (NoteExporter, error) {
 	case "txt":
 		return &TxtExporter{}, nil
 	case "md": 
-		return nil, fmt.Errorf("exporting with md is not yet implemented")
+		return &MdExporter{}, nil
 	case "json":
 		return nil, fmt.Errorf("exporting with json is not yet implemented")
 	default:
