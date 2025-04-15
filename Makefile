@@ -10,3 +10,5 @@ test:
 clean:
 	rm -f cli-journal
 	rm -f ./data/notes.db
+	rm -f ./data/*.txt
+	rm -f ./data/*.md

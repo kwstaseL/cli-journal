@@ -16,14 +16,11 @@ func (m *MdExporter) Export(note model.Note) error {
 	filename := fmt.Sprintf("%d.md", note.ID)
 	fullPath := filepath.Join(ExportPath, filename)
 
-	content := fmt.Sprintf(`# %s
-**Category**: %s  
-**Tags**: %s  
-
----
-
-%s
-`, note.Header, note.Category, note.Tags, note.Body)
+	content := FormatNoteAsMarkdown(note, NoteFormatOptions{
+		IncludeTags:     true,
+		IncludeCategory: true,
+		IncludeCreated:  true,
+	})
 
 	err := os.WriteFile(fullPath, []byte(content), 0644)
 	if err != nil {
