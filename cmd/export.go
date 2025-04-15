@@ -18,13 +18,13 @@ var exportCmd = &cobra.Command{
 
 		note, err := noteService.GetNoteById(id)
 		if err != nil {
-			noteCLIDrawer.DrawError("Failed to find note", err)
+			noteCLIDrawer.DrawError("Error while trying to find note", err)
 			return
 		}
 
 		exporter, err := export.GetExporter(platform)
 		if err != nil {
-			noteCLIDrawer.DrawError("Invalid export platform", err)
+			noteCLIDrawer.DrawError("Error while trying to export note ", err)
 			return
 		}
 

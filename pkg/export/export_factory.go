@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// TODO: Load Export path from Config
 func GetExporter(platform string) (NoteExporter, error) {
 	switch strings.ToLower(platform) {
 	case "txt":
