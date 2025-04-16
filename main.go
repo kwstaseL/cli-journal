@@ -4,8 +4,10 @@ Copyright © 2025 Konstantinos Eleftheriou <eleftheriou.konst@gmail.com>
 package main
 
 import (
+	"github.com/joho/godotenv"
 	"github.com/kwstaseL/cli-journal/cmd"
-	"github.com/kwstaseL/cli-journal/pkg/db"
+	config "github.com/kwstaseL/cli-journal/pkg/config"
+	db "github.com/kwstaseL/cli-journal/pkg/db"
 	"github.com/kwstaseL/cli-journal/pkg/db/utils"
 	logger "github.com/kwstaseL/cli-journal/pkg/logging"
 	"github.com/kwstaseL/cli-journal/pkg/repository"
@@ -19,11 +21,18 @@ func initializeDB(dbPath string) (*gorm.DB, error) {
 }
 
 func main() {
+	err := godotenv.Load()
+    if err != nil {
+		logger.LogWarn("No .env file found or unable to load it. Using default values.")
+	} 
+	
+	config.InitAppConfig()
+	utils.InitDBConfig()
+
 	database, err := initializeDB("data/notes.db")
 	if err != nil {
 		logger.LogError("Failed to connect to the database: ", err)
 	}
-	logger.LogDebug("test")
 
 	noteRepo := repository.NewNoteRepository(database)
 	noteService := service.NewNoteService(noteRepo)

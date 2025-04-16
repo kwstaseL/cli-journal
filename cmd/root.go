@@ -6,13 +6,14 @@ package cmd
 import (
 	"os"
 
+	"github.com/kwstaseL/cli-journal/cmd/utils"
 	logger "github.com/kwstaseL/cli-journal/pkg/logging"
 	"github.com/kwstaseL/cli-journal/pkg/service"
 	"github.com/spf13/cobra"
 )
 
 var noteService service.NoteService
-var noteCLIDrawer *NoteCLIDrawer
+var noteCLIDrawer *utils.NoteCLIDrawer
 
 func SetNoteService(service service.NoteService) {
 	noteService = service
@@ -34,5 +35,5 @@ func Execute() {
 
 func init() {
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	noteCLIDrawer = NewNoteCLIDrawer()
+	noteCLIDrawer = utils.NewNoteCLIDrawer()
 }

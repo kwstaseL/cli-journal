@@ -11,9 +11,9 @@ type DBConfig struct {
 	MaxOpenConns  int
 }
 
-var SQLiteConfig = InitConfig()
+var SQLiteConfig DBConfig
 
-func InitConfig() DBConfig {
+func InitDBConfig() DBConfig {
 	return DBConfig{
 		EnableLogging: getEnvAsBool("ENABLE_LOGGING", false),
 		MaxIdleConns:  getEnvAsInt("MAX_IDLE_CONNS", 0),

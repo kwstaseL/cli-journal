@@ -4,6 +4,8 @@ go 1.24.0
 
 require github.com/spf13/cobra v1.9.1
 
+require github.com/joho/godotenv v1.5.1 // indirect
+
 require (
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/glebarez/go-sqlite v1.21.2 // indirect

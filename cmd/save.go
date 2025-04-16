@@ -1,3 +1,6 @@
+/*
+Copyright © 2025 Konstantinos Eleftheriou <eleftheriou.konst@gmail.com>
+*/
 package cmd
 
 import (
