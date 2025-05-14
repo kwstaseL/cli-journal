@@ -77,30 +77,24 @@ Supported formats: txt, md
 Clone the repository:
 
 ```bash
-$ git clone git@github.com:kwstaseL/cli-journal.git
-$ cd cli-journal
+git clone git@github.com:kwstaseL/cli-journal.git
+cd cli-journal
 ```
 
 Build the application:
 
 ```bash
-$ make build
+make build
 ```
 
 Create a .env file based on the sample:
 
 ```bash
-$ cp .env.sample .env
+cp .env.sample .env
 ```
 
 Run the application:
 
 ```bash
-$ ./cli-journal
+./cli-journal
 ```
-
-### Building with Docker
-
-- Create a copy of `.env.sample` in the project's root directory and name it `.env`.
-- Fill the `.env` file with your local settings using `.env.sample` as a blueprint.
-- Run `docker compose up`.
