@@ -18,6 +18,9 @@ type noteService struct {
 }
 
 func NewNoteService(repo repository.NoteRepository) NoteService {
+	if repo == nil {
+		panic("repository cannot be nil")
+	}
 	return &noteService{repo: repo}
 }
 

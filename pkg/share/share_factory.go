@@ -14,6 +14,6 @@ func GetSharer(platform string) (NoteSharer, error) {
 	case "email":
 		return nil, fmt.Errorf("sharing with email is not supported yet")
 	default:
-		return nil, fmt.Errorf("unsupported platform: %s", platform)
+		return nil, fmt.Errorf("sharing with platform: %s is not supported yet", strings.ToLower(platform))
 	}
 }

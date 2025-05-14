@@ -37,7 +37,7 @@ func (d *NoteCLIDrawer) DrawError(context string, err error) {
 
 // --- Internal Box Drawing Logic ---
 func (d *NoteCLIDrawer) drawNoteBox(note model.Note) {
-	boxWidth := 50
+	const boxWidth = 50
 
 	printLine(boxWidth)
 	fmt.Printf("| %-10s: %-33s |\n", "Title", truncate(note.Header, 33))

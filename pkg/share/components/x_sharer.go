@@ -34,7 +34,7 @@ func formatNoteForTweet(note model.Note) Tweet {
 
 func sendTweet(tweet Tweet) error {
 	// Mock
-	fmt.Println("Sending tweet:")
+	fmt.Println("[MOCK] Sending tweet:")
 	fmt.Println(tweet.Content)
 	return nil
 }

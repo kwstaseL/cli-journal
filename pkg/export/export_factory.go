@@ -15,9 +15,9 @@ func GetExporter(platform string) (NoteExporter, error) {
 	case "md": 
 		return &components.MdExporter{Path: config.Config.ExportPath}, nil
 	case "json":
-		return nil, fmt.Errorf("exporting with json is not yet implemented")
+		return nil, fmt.Errorf("exporting with json is not yet supported")
 	default:
-		return nil, fmt.Errorf("exporting with %s is not yet implemented", strings.ToLower(platform))
+		return nil, fmt.Errorf("exporting with %s is not supported", strings.ToLower(platform))
 	}
 	
 }

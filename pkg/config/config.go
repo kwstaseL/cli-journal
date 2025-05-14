@@ -3,6 +3,8 @@ package config
 import (
 	"fmt"
 	"os"
+
+	logger "github.com/kwstaseL/cli-journal/pkg/logging"
 )
 
 type AppConfig struct {
@@ -20,7 +22,7 @@ func InitAppConfig() {
     Config = AppConfig{
         ExportPath: getEnvAsString("EXPORT_PATH", "./data"),
     }
-    fmt.Println("Config loaded:", Config)
+    logger.LogDebug("Config loaded:", Config)
 }
 
 func getEnvAsString(key string, fallback string) string {
