@@ -2,7 +2,7 @@
 
 A terminal-based tool to store, retrieve, organize and export notes.
 
-### Features
+### 1. Features
 
 - **Save notes** with structured input for title, content, tags, and category
 - **List** recently added notes
@@ -13,9 +13,9 @@ A terminal-based tool to store, retrieve, organize and export notes.
 
 - Share notes to platforms like X (Twitter) or email.
 
-### Usage
+### 2. Usage
 
-#### 1. Saving a note
+#### 2.1 Saving a note
 
 ```bash
 ./cli-journal save -t "Docker Port Mapping" \
@@ -24,9 +24,9 @@ the container to port 8080 on the host" \
 -c "DevOps" -g "docker,containers,networking"
 ```
 
-#### 2. List recent notes
+#### 2.2 List recent notes
 
-By default you will receive the 5 most recents notes:
+By default it retrieves the 5 most recents notes:
 
 ```bash
 ./cli-journal list
@@ -38,7 +38,7 @@ You can specify the number of notes to be received:
 ./cli-journal list -l 5
 ```
 
-#### 3. Search notes
+#### 2.3 Search notes
 
 You can search for a note by text:
 
@@ -64,7 +64,7 @@ or by all filters combined:
 ./cli-journal search -b "docker" -t "networking,docker" -c "DevOps"
 ```
 
-#### 4. Export a note
+#### 4 Export a note
 
 ```
 ./cli-journal export -i 1 -f txt
@@ -72,7 +72,21 @@ or by all filters combined:
 
 Supported formats: txt, md
 
-### Setup
+### 3. Requirements
+
+To build and run CLI Journal locally (outside Docker), you’ll need:
+* Go 1.20+ installed and in your PATH
+* Make (for the build command)
+* If you want to inspect your DB manually, you need to also have [SQLite CLI](https://www.sqlite.org/cli.html)
+
+### 4. Database
+CLI Journal uses SQLite to store notes locally. The database file will be created at:
+```bash
+data/notes.db
+```
+If the directory doesn't exist, it will be created automatically.
+
+### 5. Setup
 
 Clone the repository:
 
